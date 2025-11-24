@@ -1,0 +1,23 @@
+/* App.css */
+
+.app-loader-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.app-loader-spinner {
+  width: 2.5rem; /* size-10 is 40px = 2.5rem */
+  height: 2.5rem;
+  animation: app-spin 1s linear infinite;
+}
+
+@keyframes app-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
