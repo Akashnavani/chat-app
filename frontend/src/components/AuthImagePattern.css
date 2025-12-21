@@ -1,0 +1,54 @@
+/* AuthImagePattern.css */
+
+.auth-pattern-container {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background-color: oklch(var(--b2));
+  padding: 3rem;
+}
+
+@media (min-width: 1024px) {
+  .auth-pattern-container {
+    display: flex;
+  }
+}
+
+.auth-pattern-content {
+  max-width: 28rem;
+  text-align: center;
+}
+
+.auth-pattern-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.auth-pattern-block {
+  aspect-ratio: 1 / 1;
+  border-radius: 1rem;
+  background-color: oklch(var(--p) / 0.1);
+}
+
+.auth-pattern-block-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.auth-pattern-title {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  margin-top: 0;
+}
+
+.auth-pattern-subtitle {
+  color: oklch(var(--bc) / 0.6);
+  margin: 0;
+}
+
+@keyframes pulse {
+  50% { opacity: 0.5; }
+}
