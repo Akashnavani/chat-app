@@ -1,0 +1,31 @@
+/* HomePage.css */
+
+.home-page-container {
+  height: 100vh;
+  background-color: oklch(var(--b2));
+}
+
+.home-page-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.home-page-box {
+  background-color: oklch(var(--b1));
+  border-radius: 0.5rem;
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  width: 100%;
+  max-width: 72rem;
+  height: calc(100vh - 8rem);
+}
+
+.home-page-inner {
+  display: flex;
+  height: 100%;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
