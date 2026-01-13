@@ -1,0 +1,199 @@
+/* Sidebar.css */
+
+.sidebar-container {
+  height: 100%;
+  width: 5rem;
+  border-right: 1px solid oklch(var(--b3));
+  display: flex;
+  flex-direction: column;
+  transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (min-width: 1024px) {
+  .sidebar-container {
+    width: 18rem;
+  }
+}
+
+.sidebar-header {
+  border-bottom: 1px solid oklch(var(--b3));
+  width: 100%;
+  padding: 1.25rem;
+}
+
+.sidebar-title-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sidebar-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.sidebar-title-text {
+  font-weight: 500;
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .sidebar-title-text {
+    display: block;
+  }
+}
+
+.sidebar-filter {
+  margin-top: 0.75rem;
+  display: none;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+@media (min-width: 1024px) {
+  .sidebar-filter {
+    display: flex;
+  }
+}
+
+.sidebar-filter-label {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sidebar-filter-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 1.25rem;
+  height: 1.25rem;
+  flex-shrink: 0;
+  border: 1px solid oklch(var(--bc) / 0.2);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.sidebar-filter-checkbox:checked {
+  background-color: oklch(var(--bc));
+  border-color: oklch(var(--bc));
+  background-repeat: no-repeat;
+  background-image: linear-gradient(-45deg, transparent 65%, oklch(var(--bc)) 65.99%),
+    linear-gradient(45deg, transparent 75%, oklch(var(--bc)) 75.99%),
+    linear-gradient(-45deg, oklch(var(--bc)) 40%, transparent 40.99%),
+    linear-gradient(45deg, oklch(var(--bc)) 30%, oklch(var(--b1)) 30.99%, oklch(var(--b1)) 40%, transparent 40.99%),
+    linear-gradient(-45deg, oklch(var(--b1)) 50%, oklch(var(--bc)) 50.99%);
+  animation: checkmark 0.2s ease-out;
+}
+
+.sidebar-filter-checkbox:focus-visible {
+  outline: 2px solid oklch(var(--bc));
+  outline-offset: 2px;
+}
+
+.sidebar-filter-text {
+  font-size: 0.875rem;
+}
+
+.sidebar-online-count {
+  font-size: 0.75rem;
+  color: #71717a;
+}
+
+.sidebar-user-list {
+  overflow-y: auto;
+  width: 100%;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
+.sidebar-user-btn {
+  width: 100%;
+  padding: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.sidebar-user-btn:hover {
+  background-color: oklch(var(--b3));
+}
+
+.sidebar-user-btn-active {
+  background-color: oklch(var(--b3));
+  box-shadow: 0 0 0 1px oklch(var(--b3));
+}
+
+.sidebar-avatar-container {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 1024px) {
+  .sidebar-avatar-container {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+.sidebar-avatar-img {
+  width: 3rem;
+  height: 3rem;
+  object-fit: cover;
+  border-radius: 9999px;
+}
+
+.sidebar-online-badge {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 0.75rem;
+  height: 0.75rem;
+  background-color: #22c55e;
+  border-radius: 9999px;
+  box-shadow: 0 0 0 2px #18181b;
+}
+
+.sidebar-user-info {
+  display: none;
+  text-align: left;
+  min-width: 0;
+}
+
+@media (min-width: 1024px) {
+  .sidebar-user-info {
+    display: block;
+  }
+}
+
+.sidebar-user-name {
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sidebar-user-status {
+  font-size: 0.875rem;
+  color: #a1a1aa;
+}
+
+.sidebar-no-users {
+  text-align: center;
+  color: #71717a;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+@keyframes checkmark {
+  0% { background-position-y: 5px; }
+  50% { background-position-y: -2px; }
+  100% { background-position-y: 0; }
+}
