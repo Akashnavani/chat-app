@@ -1,0 +1,69 @@
+/* Skeletons.css */
+
+@keyframes skeleton-loading {
+  from { background-position: 150%; }
+  to { background-position: -50%; }
+}
+
+.skeleton-base {
+  background-color: oklch(var(--bc) / 0.1);
+  will-change: background-position;
+  background-image: linear-gradient(105deg, transparent 0%, transparent 40%, oklch(var(--bc) / 0.05) 50%, transparent 60%, transparent 100%);
+  background-size: 200% 100%;
+  background-position-x: 150%;
+  animation: skeleton-loading 1.8s ease-in-out infinite;
+}
+
+.skeleton-circle {
+  width: 100%;
+  height: 100%;
+  border-radius: 9999px;
+}
+
+.skeleton-text-sm {
+  height: 1rem;
+  width: 4rem;
+  border-radius: 0.25rem;
+}
+
+.skeleton-bubble {
+  height: 4rem;
+  width: 200px;
+  border-radius: 1rem;
+}
+
+.sidebar-skeleton-item {
+  width: 100%;
+  padding: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.skeleton-avatar-lg {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 9999px;
+}
+
+.skeleton-text-md {
+  height: 1rem;
+  width: 8rem;
+  border-radius: 0.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.skeleton-text-xs {
+  height: 0.75rem;
+  width: 4rem;
+  border-radius: 0.25rem;
+}
+
+.skeleton-border-0 {
+  border-width: 0px;
+}
+
+.skeleton-bg-transparent {
+  background-color: transparent;
+  padding: 0px;
+}
