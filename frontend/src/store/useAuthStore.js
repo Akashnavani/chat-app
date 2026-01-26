@@ -10,8 +10,7 @@ const BASE_URL =
 
 export const useAuthStore = create((set, get) => ({
   authUser: null,
-  isSendingOtp: false,
-  isVerifyingOtp: false,
+  isSigningUp: false,
   isLoggingIn: false,
   isUpdatingProfile: false,
   isCheckingAuth: true,
@@ -33,34 +32,19 @@ export const useAuthStore = create((set, get) => ({
     }
   },
 
-  // ---- SEND OTP ----
-  sendOtp: async (data) => {
-    set({ isSendingOtp: true });
+  // ---- SIGNUP ----
+  signup: async (data) => {
+    set({ isSigningUp: true });
     try {
-      const res = await axiosInstance.post("/auth/send-otp", data);
-      toast.success(res.data.message);
-      return true; // success flag for UI to switch to OTP step
-    } catch (error) {
-      toast.error(error.response?.data?.message || "An error occurred while sending OTP");
-      return false;
-    } finally {
-      set({ isSendingOtp: false });
-    }
-  },
-
-  // ---- VERIFY OTP ----
-  verifyOtp: async (data) => {
-    set({ isVerifyingOtp: true });
-    try {
-      const res = await axiosInstance.post("/auth/verify-otp", data);
+      const res = await axiosInstance.post("/auth/signup", data);
       set({ authUser: res.data });
       toast.success("Account created successfully");
 
       get().connectSocket(); // connect after signup
     } catch (error) {
-      toast.error(error.response?.data?.message || "An error occurred during verification");
+      toast.error(error.response?.data?.message || "An error occurred during signup");
     } finally {
-      set({ isVerifyingOtp: false });
+      set({ isSigningUp: false });
     }
   },
 

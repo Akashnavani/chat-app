@@ -1,11 +1,9 @@
 import { generateToken } from "../lib/utils.js";
 import User from "../models/user.model.js";
-import Otp from "../models/otp.model.js";
 import bcrypt from "bcryptjs";
 import cloudinary from "../lib/cloudinary.js";
-import { sendOtpEmail } from "../lib/nodemailer.js";
 
-export const sendOtp = async (req, res) => {
+export const signup = async (req, res) => {
   const { fullName, email, password } = req.body;
   try {
     if (!fullName || !email || !password) {
@@ -20,71 +18,19 @@ export const sendOtp = async (req, res) => {
 
     if (user) return res.status(400).json({ message: "Email already exists" });
 
-    // Generate 6-digit OTP
-    const otp = Math.floor(100000 + Math.random() * 900000).toString();
-
-
-    // Hash OTP and password
     const salt = await bcrypt.genSalt(10);
-    const hashedOtp = await bcrypt.hash(otp, salt);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    // Store OTP (upsert: if email already has a pending OTP, overwrite it)
-    await Otp.findOneAndUpdate(
-      { email },
-      {
-        email,
-        otp: hashedOtp,
-        fullName,
-        password: hashedPassword,
-        createdAt: new Date(),
-      },
-      { upsert: true, new: true }
-    );
-
-    // Send OTP email
-    await sendOtpEmail(email, otp);
-
-    res.status(200).json({ message: "OTP sent to your email" });
-  } catch (error) {
-    console.log("Error in sendOtp controller", error.message);
-    res.status(500).json({ message: "Internal Server Error" });
-  }
-};
-
-export const verifyOtp = async (req, res) => {
-  const { email, otp } = req.body;
-  try {
-    if (!email || !otp) {
-      return res.status(400).json({ message: "Email and OTP are required" });
-    }
-
-    const otpRecord = await Otp.findOne({ email });
-
-    if (!otpRecord) {
-      return res.status(400).json({ message: "OTP has expired. Please request a new one" });
-    }
-
-    const isOtpValid = await bcrypt.compare(otp, otpRecord.otp);
-
-    if (!isOtpValid) {
-      return res.status(400).json({ message: "Invalid OTP" });
-    }
-
-    // OTP is valid — create the user account
     const newUser = new User({
-      fullName: otpRecord.fullName,
-      email: otpRecord.email,
-      password: otpRecord.password, // already hashed
+      fullName,
+      email,
+      password: hashedPassword,
     });
 
     if (newUser) {
       // generate jwt token here
       generateToken(newUser._id, res);
       await newUser.save();
-
-      // Cleanup: delete the OTP record
-      await Otp.deleteOne({ email });
 
       res.status(201).json({
         _id: newUser._id,
@@ -96,7 +42,7 @@ export const verifyOtp = async (req, res) => {
       res.status(400).json({ message: "Invalid user data" });
     }
   } catch (error) {
-    console.log("Error in verifyOtp controller", error.message);
+    console.log("Error in signup controller", error.message);
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
