@@ -6,16 +6,16 @@ config();
 
 const seedUsers = [
   {
-    email: "dommiuser1@gmail.com",
-    fullName: "Abhishek",
+    email: "you@gmail.com",
+    fullName: "Akash",
     password: "123456",
-    profilePic: "https://randomuser.me/api/portraits/men/10.jpg",
+    profilePic: "",
   },
   {
-    email: "dommiuser2@gmail.com",
+    email: "you2@gmail.com",
     fullName: "Shivanand",
     password: "123456",
-    profilePic: "https://randomuser.me/api/portraits/men/11.jpg",
+    profilePic: "",
   },
 ];
 
