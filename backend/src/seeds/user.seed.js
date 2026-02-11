@@ -13,7 +13,7 @@ const seedUsers = [
   },
   {
     email: "you2@gmail.com",
-    fullName: "Shivanand",
+    fullName: "Abhishek",
     password: "123456",
     profilePic: "",
   },
